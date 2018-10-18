@@ -1,5 +1,8 @@
 const express = require('express')
 const app = express()
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.listen(3000, () => {
   console.log('App listening on port 3000!')
@@ -20,7 +23,9 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/events_sf');
 
 const Event = mongoose.model('Event', {
-  eventTitle: String
+  eventTitle: String,
+  description: String,
+  eventDate: Date
 });
 
 // INDEX
@@ -32,4 +37,19 @@ app.get('/', (req, res) => {
         .catch(err => {
             console.log(err);
         })
+})
+
+// NEW
+app.get('/events/new', (req, res) => {
+  res.render('events-new', {});
+})
+
+// CREATE
+app.post('/events', (req, res) => {
+  Event.create(req.body).then((event) => {
+      console.log(event);
+      res.redirect('/');
+  }).catch((err) => {
+      console.log(err.message);
+  })
 })

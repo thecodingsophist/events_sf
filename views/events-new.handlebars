@@ -1,0 +1,26 @@
+<form method="POST" action="/events">
+  <fieldset>
+    <legend>New Event</legend>
+    <!-- TITLE -->
+    <p>
+      <label for="eventTitle">Title</label><br>
+      <input type="text" name="eventTitle" />
+    </p>
+    <!-- DESCRIPTION -->
+    <p>
+      <label for="eventDescription">Event Description</label><br>
+      <textarea id="eventDescription" name="description" rows="10" /></textarea>
+    </p>
+    <!-- DATE -->
+    <p>
+      <label for="eventDate">Date</label><br>
+      <input type="date" name="eventDate" />
+    </p>
+  </fieldset>
+
+  <!-- BUTTON -->
+  <p>
+    <button type="submit">Save Event</button>
+  </p>
+
+</form>
