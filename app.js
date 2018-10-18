@@ -48,8 +48,17 @@ app.get('/events/new', (req, res) => {
 app.post('/events', (req, res) => {
   Event.create(req.body).then((event) => {
       console.log(event);
-      res.redirect('/');
+      res.redirect(`/events/${event._id}`);
   }).catch((err) => {
       console.log(err.message);
   })
 })
+
+// SHOW
+app.get('/events/:id', (req, res) => {
+    Event.findById(req.params.id).then((event) => {
+        res.render('events-show', { event: event })
+    }).catch((err) => {
+        console.log(err.message);
+    })
+});
