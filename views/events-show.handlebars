@@ -3,3 +3,8 @@
 <h1>{{event.eventTitle}}</h1>
 <h5>{{event.eventDate}}</h5>
 <p>{{event.description}}</p>
+
+<p><a href="/events/{{event._id}}/edit">Edit</a></p>
+<p><form method="POST" action="/events/{{event._id}}?_method=DELETE">
+    <button type="submit">Delete</button>
+</form></p>

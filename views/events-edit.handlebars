@@ -1,0 +1,27 @@
+<form method="POST" action="/events/{{event._id}}?_method=PUT">
+  <fieldset>
+    <legend>Edit Event</legend>
+    <!-- TITLE -->
+    <p>
+      <label for="eventTitle">Title</label><br>
+      <input id="eventTitle" type="text" name="eventTitle" value="{{event.eventTitle}}"/>
+    </p>
+
+    <!-- Description -->
+    <p>
+      <label for="eventDescription">Event Description</label><br>
+      <textarea id="eventDescription" type="text" name="description" rows="10"/> {{event.description}} </textarea>
+    </p>
+
+    <!-- Date -->
+    <p>
+      <label for="eventDate">Date</label><br>
+      <input type="date" name="eventDate" "{{event.eventDate}}" />
+    </p>
+
+  </fieldset>
+  <!-- BUTTON -->
+  <p>
+    <button type="submit">Save Event</button>
+  </p>
+</form>

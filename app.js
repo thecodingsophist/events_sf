@@ -1,8 +1,11 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override')
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride('_method'))
 
 app.listen(3000, () => {
   console.log('App listening on port 3000!')
@@ -62,3 +65,30 @@ app.get('/events/:id', (req, res) => {
         console.log(err.message);
     })
 });
+
+// EDIT
+app.get('/events/:id/edit', (req, res) => {
+  Event.findById(req.params.id, function(err, event) {
+    res.render('events-edit', {event: event})
+  })
+})
+
+// UPDATE
+app.put('/events/:id', (req, res) => {
+  Event.findByIdAndUpdate(req.params.id, req.body)
+    .then(event => {
+      res.redirect(`/events/${event._id}`)
+    })
+    .catch(err => {
+      console.log(err.message)
+    })
+})
+
+app.delete('/events/:id', function (req, res) {
+  console.log("DELETE event")
+  Event.findByIdAndRemove(req.params.id).then((event) => {
+    res.redirect('/');
+  }).catch((err) => {
+    console.log(err.message);
+  })
+})
